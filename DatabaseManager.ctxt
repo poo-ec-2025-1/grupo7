@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=DatabaseManager
+comment0.text=\r\n\ Classe\ DatabaseManager\:\ Gerencia\ a\ conex\u00E3o\ e\ a\ cria\u00E7\u00E3o\ de\ tabelas\ no\ SQLite.\r\n
+comment1.params=
+comment1.target=java.sql.Connection\ connect()
+comment1.text=Estabelece\ e\ retorna\ uma\ conex\u00E3o\ com\ o\ banco\ de\ dados\ SQLite.
+comment2.params=
+comment2.target=void\ createTables()
+comment2.text=Cria\ as\ tabelas\ necess\u00E1rias\ no\ banco\ de\ dados,\ se\ n\u00E3o\ existirem.
+numComments=3

@@ -1,0 +1,12 @@
+#BlueJ class context
+comment0.target=MotoristaDAO
+comment0.text=\r\n\ MotoristaDAO\:\ DAO\ para\ a\ classe\ MotoristaUFG.\r\n\ Orquestra\ a\ persist\u00EAncia\ de\ um\ MotoristaUFG,\ incluindo\ seus\ dados\ de\ Usuario\ e\ Veiculo.\r\n
+comment1.params=
+comment1.target=MotoristaDAO()
+comment2.params=motorista
+comment2.target=boolean\ save(MotoristaUFG)
+comment2.text=Salva\ um\ MotoristaUFG\ no\ DB,\ usando\ transa\u00E7\u00F5es\ para\ garantir\ consist\u00EAncia.
+comment3.params=usuarioId
+comment3.target=java.util.Optional\ findById(java.lang.String)
+comment3.text=Busca\ um\ MotoristaUFG\ pelo\ ID\ do\ usu\u00E1rio.
+numComments=4

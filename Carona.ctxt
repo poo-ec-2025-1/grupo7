@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.target=Carona
+comment0.text=\r\n\ Classe\ Carona\:\ representa\ uma\ viagem\ oferecida\ ou\ solicitada.\r\n
+comment1.params=origem\ destino\ dataHoraPartida
+comment1.target=Carona(java.lang.String,\ java.lang.String,\ java.time.LocalDateTime)
+comment2.params=
+comment2.target=java.lang.String\ getId()
+comment3.params=
+comment3.target=java.lang.String\ getOrigem()
+comment4.params=
+comment4.target=java.lang.String\ getDestino()
+comment5.params=
+comment5.target=java.time.LocalDateTime\ getDataHoraPartida()
+comment6.params=
+comment6.target=StatusCarona\ getStatus()
+comment7.params=status
+comment7.target=void\ setStatus(StatusCarona)
+numComments=8

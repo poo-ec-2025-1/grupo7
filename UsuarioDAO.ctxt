@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=UsuarioDAO
+comment0.text=\r\n\ UsuarioDAO\:\ DAO\ para\ a\ classe\ Usuario.\r\n\ Lida\ com\ a\ persist\u00EAncia\ de\ dados\ de\ usu\u00E1rios\ gen\u00E9ricos.\r\n
+comment1.params=usuario
+comment1.target=boolean\ save(Usuario)
+comment1.text=Salva\ um\ objeto\ Usuario\ no\ DB.
+comment2.params=id
+comment2.target=java.util.Optional\ findById(java.lang.String)
+comment2.text=Busca\ um\ usu\u00E1rio\ pelo\ seu\ ID.
+comment3.params=email
+comment3.target=java.util.Optional\ findByEmail(java.lang.String)
+comment3.text=Busca\ um\ usu\u00E1rio\ pelo\ seu\ email.
+numComments=4
