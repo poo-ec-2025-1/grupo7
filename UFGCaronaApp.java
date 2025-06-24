@@ -1,15 +1,13 @@
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-// Nenhuma declaração de import para as classes locais é necessária
-// pois todas estão no mesmo pacote padrão.
 
 public class UFGCaronaApp {
     public static void main(String[] args) {
         // 1. Inicializa o banco de dados e cria as tabelas.
         DatabaseManager.createTables();
 
-        // 2. Cria instâncias dos DAOs para interagir com o DB.
+        // 2. Cria instâncias DAOs para interagir com o DB.
         VeiculoDAO veiculoDAO = new VeiculoDAO();
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         MotoristaDAO motoristaDAO = new MotoristaDAO();
@@ -23,7 +21,6 @@ public class UFGCaronaApp {
             "senhaNova", "62998765432",
             "11223344556", "B", meuCarro, "201998765");
 
-        // DEBUG: Email antes de salvar.
         System.out.println("DEBUG APP: Email de motoristaCarlos antes de salvar: " + motoristaCarlos.getEmail());
 
         boolean salvo = motoristaDAO.save(motoristaCarlos);

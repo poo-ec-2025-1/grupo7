@@ -4,7 +4,7 @@ import java.util.UUID;
  * Classe Veiculo: representa o veículo do motorista.
  */
 class Veiculo {
-    private String id; // ID único para persistência.
+    private String id;
     private String placa;
     private String modelo;
     private String marca;
@@ -12,7 +12,7 @@ class Veiculo {
     private int ano;
     private int capacidadePassageiros;
 
-    /** Construtor para criar um NOVO veículo. */
+    /** Construtor para um NOVO veículo. */
     public Veiculo(String placa, String modelo, String marca, String cor, int ano, int capacidadePassageiros) {
         this.id = UUID.randomUUID().toString();
         this.placa = placa;
@@ -34,7 +34,6 @@ class Veiculo {
         this.capacidadePassageiros = capacidadePassageiros;
     }
 
-    // Getters e Setters.
     public String getId() { return id; }
     public String getPlaca() { return placa; }
     public String getModelo() { return modelo; }
