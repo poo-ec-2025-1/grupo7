@@ -4,25 +4,21 @@ import java.util.Optional;
 
 public class UFGCaronaApp {
     public static void main(String[] args) {
-        // 1. Inicializa o banco de dados e cria as tabelas.
         DatabaseManager.createTables();
 
-        // 2. Cria instâncias dos DAOs.
         VeiculoDAO veiculoDAO = new VeiculoDAO();
         UsuarioDAO usuarioDAO = new UsuarioDAO();
         MotoristaDAO motoristaDAO = new MotoristaDAO();
-        PassageiroDAO passageiroDAO = new PassageiroDAO(); // Novo DAO
-        CaronaDAO caronaDAO = new CaronaDAO(); // Novo DAO
+        PassageiroDAO passageiroDAO = new PassageiroDAO();
+        CaronaDAO caronaDAO = new CaronaDAO();
 
-        // --- DEMONSTRAÇÃO: Salvar um novo Motorista UFG
-        System.out.println("\n--- DEMONSTRAÇÃO: Salvar um novo Motorista UFG ---");
+        System.out.println("\n--- Demonstração: Salvar Motorista UFG ---");
         Veiculo meuCarro = new Veiculo("PLACA" + System.currentTimeMillis(), "Fusca", "Volkswagen", "Azul", 1970, 3);
         MotoristaUFG motoristaCarlos = new MotoristaUFG(
-            "Carlos Pereira", "carlos.pereira." + System.currentTimeMillis() + "@ufg.br",
+            "Carlos Pereira", "carlos.pereira." + System.currentTimeMillis() + "@discente.ufg.br",
             "senhaNova", "62998765432",
             "11223344556", "B", meuCarro, "201998765");
 
-        System.out.println("DEBUG APP: Email de motoristaCarlos antes de salvar: " + motoristaCarlos.getEmail());
         boolean salvoMotorista = motoristaDAO.save(motoristaCarlos);
         if (salvoMotorista) {
             System.out.println("Motorista Carlos salvo no DB com ID: " + motoristaCarlos.getId());
@@ -30,10 +26,9 @@ public class UFGCaronaApp {
             System.out.println("Falha ao salvar Motorista Carlos.");
         }
 
-        // --- DEMONSTRAÇÃO: Salvar um novo Passageiro
-        System.out.println("\n--- DEMONSTRAÇÃO: Salvar um novo Passageiro ---");
+        System.out.println("\n--- Demonstração: Salvar Passageiro ---");
         Passageiro passageiroAna = new Passageiro(
-            "Ana Souza", "ana.souza." + System.currentTimeMillis() + "@ufg.br",
+            "Ana Souza", "ana.souza." + System.currentTimeMillis() + "@discente.ufg.br",
             "senhaAna", "62991112222");
         boolean salvoPassageiro = passageiroDAO.save(passageiroAna);
         if (salvoPassageiro) {
@@ -42,12 +37,10 @@ public class UFGCaronaApp {
             System.out.println("Falha ao salvar Passageiro Ana.");
         }
 
-
-        // --- DEMONSTRAÇÃO: Motorista oferece uma Carona
-        System.out.println("\n--- DEMONSTRAÇÃO: Motorista Carlos oferece uma Carona ---");
+        System.out.println("\n--- Demonstração: Motorista Carlos oferece uma Carona ---");
         Carona caronaOferecida = new Carona(
             "Campus Samambaia", "Terminal Bandeiras", LocalDateTime.now().plusHours(2),
-            motoristaCarlos.getId()); // Motorista oferece a carona
+            motoristaCarlos.getId());
         boolean salvoCarona = caronaDAO.save(caronaOferecida);
         if (salvoCarona) {
             System.out.println("Carona oferecida e salva com ID: " + caronaOferecida.getId());
@@ -55,8 +48,7 @@ public class UFGCaronaApp {
             System.out.println("Falha ao oferecer e salvar carona.");
         }
 
-        // --- DEMONSTRAÇÃO: Listar Caronas Disponíveis ---
-        System.out.println("\n--- DEMONSTRAÇÃO: Listar Caronas Disponíveis ---");
+        System.out.println("\n--- Demonstração: Listar Caronas Disponíveis ---");
         List<Carona> caronasDisponiveis = caronaDAO.findAvailableRides();
         if (caronasDisponiveis.isEmpty()) {
             System.out.println("Nenhuma carona disponível no momento.");
@@ -67,10 +59,9 @@ public class UFGCaronaApp {
             }
         }
 
-        // --- DEMONSTRAÇÃO: Passageiro solicita uma Carona
-        System.out.println("\n--- DEMONSTRAÇÃO: Passageiro Ana solicita uma Carona ---");
+        System.out.println("\n--- Demonstração: Passageiro Ana solicita uma Carona ---");
         if (!caronasDisponiveis.isEmpty()) {
-            Carona caronaParaSolicitar = caronasDisponiveis.get(0); // Pega a primeira carona disponível
+            Carona caronaParaSolicitar = caronasDisponiveis.get(0);
             boolean solicitacaoSucesso = passageiroAna.pedirCarona(caronaDAO, caronaParaSolicitar.getId());
             if (solicitacaoSucesso) {
                 System.out.println("Passageiro Ana solicitou carona ID: " + caronaParaSolicitar.getId());
@@ -81,12 +72,30 @@ public class UFGCaronaApp {
             System.out.println("Não há caronas para solicitar no momento.");
         }
 
+        System.out.println("\n--- Teste: Criação de Aluno UFG (e-mail INVÁLIDO) ---");
+        try {
+            AlunoUFG alunoInvalido = new AlunoUFG(
+                "Maria Teste", "maria.teste." + System.currentTimeMillis() + "@gmail.com", "senhaMaria", "62993334444", "202112345");
+            System.out.println("ERRO: Aluno com e-mail inválido criado com sucesso (NÃO DEVERIA ACONTECER).");
+        } catch (IllegalArgumentException e) {
+            System.out.println("SUCESSO: Erro esperado ao tentar criar Aluno com e-mail inválido:");
+            System.out.println(e.getMessage());
+        }
 
-        //  Exemplo de login
-        System.out.println("\n--- Exemplo de login (motorista Joao) ---");
+        System.out.println("\n--- Teste: Criação de Aluno UFG (e-mail VÁLIDO) ---");
+        try {
+            AlunoUFG alunoValido = new AlunoUFG(
+                "Pedro Valido", "pedro.valido." + System.currentTimeMillis() + "@discente.ufg.br", "senhaPedro", "62995556666", "202254321");
+            System.out.println("SUCESSO: Aluno Pedro criado com e-mail válido: " + alunoValido.getEmail());
+        } catch (IllegalArgumentException e) {
+            System.out.println("ERRO: Falha ao criar Aluno com e-mail VÁLIDO (NÃO DEVERIA ACONTECER):");
+            System.out.println(e.getMessage());
+        }
+
+        System.out.println("\n--- Exemplo: Login de Motorista (Joao) ---");
         Veiculo meuCarro2 = new Veiculo("ABC" + System.currentTimeMillis(), "Palio", "Fiat", "Prata", 2018, 4);
         MotoristaUFG motoristaJoao = new MotoristaUFG(
-            "João Silva", "joao.silva." + System.currentTimeMillis() + "@ufg.br",
+            "João Silva", "joao.silva." + System.currentTimeMillis() + "@discente.ufg.br",
             "senha123", "62991234567",
             "12345678901", "B", meuCarro2, "202012345");
 
