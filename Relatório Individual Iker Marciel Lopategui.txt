@@ -1,0 +1,85 @@
+Relatório Individual de Implementação - Projeto UFGCarona
+Responsável: Iker Marciel Lopategui
+
+
+1. Minhas Obrigações e Responsabilidades na Implementação
+
+Como responsável pela implementação do projeto UFGCarona, minhas obrigações foram:
+
+Compreender e Traduzir Requisitos: Entender as necessidades do aplicativo de caronas para a UFG e traduzi-las em soluções técnicas.
+
+Modelagem de Software: Desenvolver diagramas UML (casos de uso, classes, sequência) em PlantUML para visualizar a arquitetura e o comportamento do sistema.
+
+Implementação de Código: Escrever o código-fonte em Java, seguindo os padrões de projeto estabelecidos.
+
+Aplicação de Conceitos Técnicos: Utilizar e aplicar conceitos como herança, persistência de dados (ORM básico), JDBC e SQLite.
+
+Depuração e Resolução de Problemas: Identificar, diagnosticar e corrigir erros de compilação e de tempo de execução, assegurando o funcionamento correto da aplicação.
+
+Documentação Técnica: Criar e manter resumos, explicações e documentação de apoio (READMEs) para o projeto.
+
+Adaptação a Ferramentas: Garantir a compatibilidade e o funcionamento do código no ambiente BlueJ.
+
+2. Implementações e Contribuições Realizadas
+
+Minha atuação na implementação do projeto UFGCarona envolveu as seguintes entregas e responsabilidades:
+
+Modelagem Inicial (PlantUML):
+
+Fui responsável pela criação de Diagramas de Caso de Uso (visão geral, ator Aluno, e cenário de teste prático no BlueJ) para definir as funcionalidades e interações do sistema.
+
+Implementei os Diagramas de Classes para estruturar as entidades do projeto (Usuário, Motorista, Veículo, Carona, etc.) e seus relacionamentos.
+
+Desenvolvi os Diagramas de Sequência para ilustrar o fluxo de operações em casos de uso específicos (ex: Pedir Carona).
+
+Executei a resolução de erros de sintaxe nos diagramas PlantUML, corrigindo problemas com comentários, aninhamento de blocos e caracteres especiais.
+
+Estrutura de Classes Java (Programação Orientada a Objetos):
+
+Hierarquia de Usuários: Implementei a superclasse abstrata Usuario e suas subclasses Motorista e Passageiro, além de MotoristaUFG (que estende Motorista).
+
+Classes de Entidade: Criei as classes Veiculo, Carona, Avaliacao, StatusCarona (enum) para modelar os dados do sistema.
+
+Construtores Duplos: Para cada classe de entidade, implementei construtores para: (a) criar novos objetos em memória (com geração de IDs) e reconstruir objetos a partir de dados recuperados do banco de dados (utilizando IDs e hashes existentes).
+
+Getters e Setters: Assegurei a presença dos métodos de acesso e modificação dos atributos, essenciais para a interação com a camada de persistência.
+
+Persistência de Dados (SQLite e JDBC):
+
+DatabaseManager.java: Implementei esta classe central para:
+
+Gerenciar a conexão com o banco de dados SQLite (ufgcarona.db).
+
+Definir e executar os comandos SQL (CREATE TABLE IF NOT EXISTS) para construir o esquema do banco de dados (tabelas Usuarios, Veiculos, Motoristas, Caronas, Avaliacoes), incluindo chaves primárias, únicas e estrangeiras.
+
+Fui responsável por ativar explicitamente a verificação de chaves estrangeiras (PRAGMA foreign_keys = ON;) para garantir a integridade referencial dos dados.
+
+Padrão DAO (Data Access Object):
+
+Implementei os DAOs (UsuarioDAO, VeiculoDAO, PassageiroDAO, MotoristaDAO, CaronaDAO).
+
+Cada DAO foi desenvolvido para encapsular as operações de salvar (save), buscar (findById, findAvailableRides) e atualizar (requestCarona) no DB.
+
+Implementei o uso de transações no MotoristaDAO.save() para assegurar que o salvamento de dados complexos (Usuario + Motorista + Veiculo) fosse atômico e consistente.
+
+Depuração da Persistência: Desempenhei um papel fundamental na identificação e resolução de erros complexos, tais como:
+
+Violações de CONSTRAINT_UNIQUE (placa, e-mail).
+
+Falhas de CONSTRAINT_NOTNULL (e-mail).
+
+Problemas de JOIN e inconsistências de dados decorrentes da inatividade das chaves estrangeiras.
+
+Utilizei amplamente System.out.println para depuração e realizei a verificação externa do DB com o DB Browser for SQLite.
+
+Frontend Básico e Testes (Contexto BlueJ):
+
+A classe UFGCaronaApp.java foi desenvolvida e refinada como um driver de teste console-based, demonstrando o fluxo completo de persistência.
+
+Fui responsável por orientar sobre como realizar testes práticos interativos no BlueJ (utilizando o método main e a Bancada de Objetos).
+
+Provei orientações sobre a implementação de um frontend JavaFX programático, adaptado para o ambiente BlueJ.
+
+3. Conclusão
+
+Como responsável pela implementação, acredito que o projeto UFGCarona estabeleceu uma base de dados sólida e funcional. A camada de persistência em SQLite e JDBC foi construída de forma robusta, abordando e superando complexidades como herança, chaves estrangeiras e transações. As classes de entidade foram bem modeladas, e os DAOs fornecem uma interface clara para a interação com o banco de dados. Este trabalho pavimenta o caminho para o desenvolvimento da interface gráfica e a futura expansão das funcionalidades do aplicativo.
