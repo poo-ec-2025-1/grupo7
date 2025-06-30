@@ -1,0 +1,43 @@
+Passos para o Teste Prático no BlueJ:
+
+Prepare o Banco de Dados:
+
+Primeiro, compile todas as suas classes.
+
+No painel central, clique com o botão direito na classe DatabaseManager e selecione o método estático void createTables(). Execute-o. (Faça isso apenas uma vez por sessão de teste ou se você deletar o ufgcarona.db).
+
+Crie Instâncias dos DAOs:
+
+Para cada classe DAO (ex: MotoristaDAO, CaronaDAO, PassageiroDAO), clique com o botão direito sobre ela no painel central.
+
+Selecione new <NomeDoDAO>() (ex: new MotoristaDAO()).
+
+Um ícone do objeto (ex: motoristaDAO_1) aparecerá na Bancada de Objetos (parte inferior da janela do BlueJ).
+
+Crie Instâncias de Entidades e Salve-as:
+
+Exemplo (Motorista):
+
+Clique com o botão direito em Veiculo e crie um novo Veiculo (ex: new Veiculo("PLACA" + System.currentTimeMillis(), ...)). O veiculo_1 aparecerá na Bancada.
+
+Clique com o botão direito em MotoristaUFG e crie um novo MotoristaUFG. Ao preencher os parâmetros, para o Veiculo, clique na setinha e selecione o veiculo_1 que você já criou. O motoristaUFG_1 aparecerá.
+
+Agora, use o DAO para salvar: Clique com o botão direito em motoristaDAO_1 na Bancada e selecione boolean save(MotoristaUFG motorista). Selecione motoristaUFG_1 como argumento. Observe o resultado na janela e no terminal.
+
+Repita para criar e salvar um Passageiro usando o passageiroDAO_1.
+
+Realize Operações de Carona:
+
+Oferecer Carona: Crie um objeto Carona e salve-o usando caronaDAO_1.save(carona_1). Lembre-se de usar o ID do motorista (motoristaUFG_1.getId()) ao criar a Carona.
+
+Listar Caronas: Clique com o botão direito em caronaDAO_1 e selecione List<Carona> findAvailableRides(). A lista aparecerá em uma nova janela.
+
+Solicitar Carona: Clique com o botão direito em caronaDAO_1 e selecione boolean requestCarona(String caronaId, String passageiroId). Cole os IDs da carona e do passageiro da Bancada de Objetos.
+
+Inspecionar e Verificar:
+
+A qualquer momento, clique com o botão direito em qualquer objeto na Bancada e selecione Inspect para ver seus atributos internos.
+
+Para verificar a persistência real, abra o arquivo ufgcarona.db (localizado na pasta do seu projeto) com o DB Browser for SQLite para navegar pelas tabelas e confirmar que os dados foram salvos e atualizados conforme esperado.
+
+Esse método permite um teste iterativo e flexível, dando a você controle direto sobre a criação de objetos e a chamada de métodos, o que é ideal para depurar e entender o fluxo de dados em seu aplicativo.
