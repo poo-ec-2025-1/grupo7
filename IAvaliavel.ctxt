@@ -1,8 +1,0 @@
-#BlueJ class context
-comment0.target=IAvaliavel
-comment0.text=\r\n\ Interface\ IAvaliavel\:\ Define\ um\ contrato\ para\ classes\ que\ podem\ ser\ avaliadas.\r\n
-comment1.params=avaliacao
-comment1.target=void\ receberAvaliacao(Avaliacao)
-comment2.params=
-comment2.target=double\ calcularMediaAvaliacoes()
-numComments=3
