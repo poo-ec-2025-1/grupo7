@@ -9,30 +9,23 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * CaronaDAO: Classe de Acesso a Dados para operações relacionadas a Caronas.
- * Gerencia a persistência de objetos Carona no banco de dados.
- */
+
 public class CaronaDAO {
 
-    /**
-     * Salva um objeto Carona no banco de dados.
-     * @param carona O objeto Carona a ser salvo.
-     * @return true se a carona foi salva com sucesso, false caso contrário.
-     */
+  
     public boolean save(Carona carona) {
-        // **Modificado: Adicionado 'vagas_disponiveis' ao SQL INSERT**
+       
         String sql = "INSERT INTO Caronas(id, origem, destino, data_hora_partida, status, motorista_id, passageiro_id, vagas_disponiveis) VALUES(?,?,?,?,?,?,?,?)";
         try (Connection conn = DatabaseManager.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, carona.getId());
             pstmt.setString(2, carona.getOrigem());
             pstmt.setString(3, carona.getDestino());
-            pstmt.setString(4, carona.getDataHoraPartida().toString()); // LocalDateTime para String
-            pstmt.setString(5, carona.getStatus().name()); // Enum para String
+            pstmt.setString(4, carona.getDataHoraPartida().toString()); 
+            pstmt.setString(5, carona.getStatus().name()); 
             pstmt.setString(6, carona.getMotoristaId());
-            pstmt.setString(7, carona.getPassageiroId()); // Pode ser null
-            pstmt.setInt(8, carona.getVagasDisponiveis()); // **NOVO CAMPO**
+            pstmt.setString(7, carona.getPassageiroId()); 
+            pstmt.setInt(8, carona.getVagasDisponiveis()); 
             pstmt.executeUpdate();
             System.out.println("Carona salva: " + carona.getOrigem() + " -> " + carona.getDestino() + " com " + carona.getVagasDisponiveis() + " vagas.");
             return true;
@@ -43,12 +36,7 @@ public class CaronaDAO {
         }
     }
 
-    /**
-     * Atualiza o status de uma carona para FINALIZADA e associa um passageiro.
-     * @param caronaId O ID da carona a ser finalizada.
-     * @param passageiroId O ID do passageiro que finalizou a carona.
-     * @return true se a carona foi atualizada com sucesso, false caso contrário.
-     */
+
     public boolean finalizarCarona(String caronaId, String passageiroId) {
         String sql = "UPDATE Caronas SET status = ?, passageiro_id = ? WHERE id = ?";
         try (Connection conn = DatabaseManager.connect();
@@ -63,15 +51,9 @@ public class CaronaDAO {
         }
     }
 
-    /**
-     * Atualiza o status de uma carona para CONFIRMADA e associa um passageiro.
-     * Diminui o número de vagas.
-     * @param caronaId O ID da carona a ser solicitada/confirmada.
-     * @param passageiroId O ID do passageiro que solicitou a carona.
-     * @return true se a carona foi atualizada com sucesso, false caso contrário.
-     */
+   
     public boolean requestCarona(String caronaId, String passageiroId) {
-        // Primeiro, obtenha a carona para verificar as vagas
+      
         Optional<Carona> caronaOpt = findById(caronaId);
         if (caronaOpt.isEmpty()) {
             System.err.println("Carona não encontrada para solicitação: " + caronaId);
@@ -84,13 +66,13 @@ public class CaronaDAO {
             return false;
         }
 
-        // Se houver vagas, atualize o status para CONFIRMADA e diminua as vagas
+  
         String sql = "UPDATE Caronas SET status = ?, passageiro_id = ?, vagas_disponiveis = ? WHERE id = ?";
         try (Connection conn = DatabaseManager.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
             pstmt.setString(1, Carona.StatusCarona.CONFIRMADA.name());
             pstmt.setString(2, passageiroId);
-            pstmt.setInt(3, carona.getVagasDisponiveis() - 1); // Diminui uma vaga
+            pstmt.setInt(3, carona.getVagasDisponiveis() - 1); 
             pstmt.setString(4, caronaId);
             return pstmt.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -100,15 +82,10 @@ public class CaronaDAO {
         }
     }
 
-    /**
-     * Busca todas as caronas disponíveis (PENDENTE e com vagas > 0) na plataforma.
-     * Retorna uma lista de Caronas com detalhes do Motorista.
-     * @return Uma lista de objetos Carona disponíveis.
-     */
+ 
     public List<Carona> findAvailableRides() {
         List<Carona> caronasDisponiveis = new ArrayList<>();
-        // Junta Carona com Usuario (para pegar nome do motorista)
-        // **Modificado: Adicionado 'vagas_disponiveis' ao SELECT e condição WHERE**
+      
         String sql = "SELECT c.id, c.origem, c.destino, c.data_hora_partida, c.status, " +
                      "c.motorista_id, c.passageiro_id, c.vagas_disponiveis, u.nome AS motorista_nome " +
                      "FROM Caronas c INNER JOIN Usuarios u ON c.motorista_id = u.id " +
@@ -127,10 +104,9 @@ public class CaronaDAO {
                     Carona.StatusCarona.valueOf(rs.getString("status")),
                     rs.getString("motorista_id"),
                     rs.getString("passageiro_id"),
-                    rs.getInt("vagas_disponiveis") // **NOVO CAMPO**
+                    rs.getInt("vagas_disponiveis") 
                 );
-                // Você pode adicionar a lógica para buscar o nome do motorista e adicioná-lo
-                // ao objeto Carona ou formatá-lo diretamente na PrincipalView.
+             
                 System.out.println("Carona disponível carregada: ID " + carona.getId() + " - " + carona.getOrigem() + " -> " + carona.getDestino() +
                                    " (Motorista: " + rs.getString("motorista_nome") + ") Vagas: " + carona.getVagasDisponiveis());
                 caronasDisponiveis.add(carona);
@@ -142,13 +118,10 @@ public class CaronaDAO {
         return caronasDisponiveis;
     }
 
-    /**
-     * Busca uma Carona pelo seu ID.
-     * @param id O ID da carona a ser buscada.
-     * @return Um Optional contendo a Carona se encontrada, ou um Optional vazio.
-     */
+   
+     
     public Optional<Carona> findById(String id) {
-        // **Modificado: Adicionado 'vagas_disponiveis' ao SQL SELECT**
+      
         String sql = "SELECT id, origem, destino, data_hora_partida, status, motorista_id, passageiro_id, vagas_disponiveis FROM Caronas WHERE id = ?";
         try (Connection conn = DatabaseManager.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -163,7 +136,7 @@ public class CaronaDAO {
                     Carona.StatusCarona.valueOf(rs.getString("status")),
                     rs.getString("motorista_id"),
                     rs.getString("passageiro_id"),
-                    rs.getInt("vagas_disponiveis") // **NOVO CAMPO**
+                    rs.getInt("vagas_disponiveis")
                 );
                 return Optional.of(carona);
             }
