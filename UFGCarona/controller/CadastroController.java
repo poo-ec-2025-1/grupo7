@@ -74,7 +74,7 @@ public class CadastroController {
 
     private void cadastrarMotorista() throws Exception {
         String placa = view.getPlacaVeiculo().trim().toUpperCase();
-        // Verificação extra de placa existente
+       
         Optional<Veiculo> veiculoExistente = new VeiculoDAO().findByPlaca(placa);
         if (veiculoExistente.isPresent()) {
             throw new Exception("Placa " + placa + " já está cadastrada");
@@ -86,7 +86,7 @@ public class CadastroController {
         
         Veiculo veiculo = new Veiculo(
             placa,
-            "Modelo Padrão",  // Pode substituir por campos da view
+            "Modelo Padrão",
             "Marca Padrão",
             "Cor Padrão",
             2020,
@@ -106,7 +106,7 @@ public class CadastroController {
             view.getSenha(),
             view.getTelefone(),
             view.getNumeroHabilitacao(),
-            "B", // Categoria padrão
+            "B", 
             veiculo,
             gerarIdUFG(view.getTelefone())
         );
