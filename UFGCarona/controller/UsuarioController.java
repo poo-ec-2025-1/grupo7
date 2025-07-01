@@ -14,14 +14,13 @@ public class UsuarioController {
             if (tipoUsuario.equalsIgnoreCase("MOTORISTA")) {
                 MotoristaUFG motorista = (MotoristaUFG) usuario;
                 
-                // Salvar o veículo primeiro
-                VeiculoDAO veiculoDAO = new VeiculoDAO();
+                  VeiculoDAO veiculoDAO = new VeiculoDAO();
                 if (!veiculoDAO.save(motorista.getVeiculo())) {
                     System.err.println("Erro ao salvar veículo do motorista");
                     return false;
                 }
                 
-                // Salvar o motorista (que também salva o usuário)
+           
                 return new MotoristaDAO().save(motorista);
             } else {
                 Passageiro passageiro = (Passageiro) usuario;
