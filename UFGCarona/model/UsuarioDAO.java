@@ -33,16 +33,12 @@ public class UsuarioDAO {
             return success;
         } catch (SQLException e) {
             System.err.println("Erro ao salvar usuário: " + e.getMessage());
-            e.printStackTrace(); // Para depuração
+            e.printStackTrace(); 
             return false;
         }
     }
 
-    /**
-     * Busca um usuário pelo email e tenta instanciar o tipo correto (Passageiro ou MotoristaUFG).
-     * @param email O email do usuário a ser buscado.
-     * @return Um Optional contendo o objeto Usuario (Passageiro ou MotoristaUFG) se encontrado, ou Optional vazio.
-     */
+    
     public Optional<Usuario> findByEmail(String email) {
         String sqlUsuario = "SELECT id, nome, email, senha_hash, telefone, ativo FROM Usuarios WHERE email = ?";
         try (Connection conn = connect();
@@ -76,7 +72,6 @@ public class UsuarioDAO {
                     ResultSet rsMotorista = pstmtMotorista.executeQuery();
 
                     if (rsMotorista.next()) {
-                        // É um Motorista, agora busca os dados do Veículo
                         String veiculoId = rsMotorista.getString("veiculo_id");
                         Veiculo veiculo = null;
                         if (veiculoId != null) {
@@ -99,8 +94,7 @@ public class UsuarioDAO {
                             }
                         }
 
-                        // Regenera o idUFG (assumindo que não é persistido diretamente na tabela Motoristas)
-                        // Lógica de gerarIdUFG copiada do CadastroController
+                       
                         String idUFG = "UFG" + telefone.substring(telefone.length() - 4);
                         System.out.println("  idUFG gerado: " + idUFG);
 
@@ -109,13 +103,13 @@ public class UsuarioDAO {
                             userId, nome, emailDb, senhaHash, telefone, ativo,
                             rsMotorista.getString("numero_habilitacao"),
                             rsMotorista.getString("categoria_habilitacao"),
-                            veiculo, // Pode ser null se o veículo não for encontrado
+                            veiculo,
                             idUFG
                         ));
                     }
                 }
 
-                // Se não é Motorista, assume que é Passageiro
+              
                 System.out.println("  Usuário é um Passageiro.");
                 return Optional.of(new Passageiro(
                     userId, nome, emailDb, senhaHash, telefone, ativo
@@ -126,7 +120,7 @@ public class UsuarioDAO {
             }
         } catch (SQLException e) {
             System.err.println("Erro ao buscar usuário por email: " + e.getMessage());
-            e.printStackTrace(); // Para depuração
+            e.printStackTrace();
         }
         return Optional.empty();
     }
