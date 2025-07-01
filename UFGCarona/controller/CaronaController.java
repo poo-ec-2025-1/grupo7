@@ -15,7 +15,7 @@ public class CaronaController {
     }
 
     public boolean oferecerCarona(Carona carona, Usuario motorista) {
-        // Verifica se o usuário é realmente um motorista
+       
         if (motoristaDAO.findById(motorista.getId()).isEmpty()) {
             return false;
         }
