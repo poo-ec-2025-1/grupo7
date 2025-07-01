@@ -8,11 +8,11 @@ import UFGCarona.model.MotoristaUFG;
 import UFGCarona.view.OferecerCaronaView;
 
 import javax.swing.JOptionPane;
-import java.awt.event.ActionEvent; // Certifique-se que esta importação existe!
+import java.awt.event.ActionEvent;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-// import java.util.UUID; // Não precisa importar UUID aqui, pois o construtor da Carona já o gera
+
 
 public class OferecerCaronaController {
     private final OferecerCaronaView view;
@@ -29,17 +29,13 @@ public class OferecerCaronaController {
     }
 
     private void configurarAcoes() {
-        // Esta linha é a que está dando problema
+    
         view.getBtnConfirmar().addActionListener(this::confirmarOfertaCarona);
         view.getBtnCancelar().addActionListener(e -> view.dispose());
     }
 
-    /**
-     * Trata a ação de confirmar a oferta da carona.
-     * Valida os dados, cria a Carona e tenta salvá-la no banco de dados.
-     * **IMPORTANTE: A assinatura deste método deve ser (ActionEvent e)!**
-     */
-    private void confirmarOfertaCarona(ActionEvent e) { // <-- Verifique esta linha!
+   
+    private void confirmarOfertaCarona(ActionEvent e) { 
         String origem = view.getTxtOrigem().getText().trim();
         String destino = view.getTxtDestino().getText().trim();
         String dataHoraStr = view.getTxtDataHora().getText().trim();
