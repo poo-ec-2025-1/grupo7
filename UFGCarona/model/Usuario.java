@@ -1,6 +1,8 @@
+package UFGCarona.model;
+
 import java.util.UUID;
 
-abstract class Usuario {
+abstract public class Usuario {
     protected String id;
     protected String nome;
     protected String email;

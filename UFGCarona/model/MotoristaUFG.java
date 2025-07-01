@@ -1,15 +1,12 @@
+package UFGCarona.model;
+
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Representa um Motorista da UFG. Herda de Motorista e implementa IAvaliavel.
- * Adiciona identificador UFG e gerencia avaliações.
- */
-class MotoristaUFG extends Motorista implements IAvaliavel {
-    private String idUFG; // Identificador UFG (matrícula/Siape).
-    private List<Avaliacao> avaliacoesRecebidas; // Lista de avaliações para este motorista.
+public class MotoristaUFG extends Motorista implements IAvaliavel {
+    private String idUFG;
+    private List<Avaliacao> avaliacoesRecebidas;
 
-    /** Construtor para criar um NOVO MotoristaUFG. */
     public MotoristaUFG(String nome, String email, String senha, String telefone,
                         String numeroHabilitacao, String categoriaHabilitacao, Veiculo veiculo,
                         String idUFG) {
@@ -18,7 +15,6 @@ class MotoristaUFG extends Motorista implements IAvaliavel {
         this.avaliacoesRecebidas = new ArrayList<>();
     }
 
-    /** Construtor para carregar MotoristaUFG do banco de dados. */
     public MotoristaUFG(String id, String nome, String email, String senhaHash, String telefone, boolean ativo,
                         String numeroHabilitacao, String categoriaHabilitacao, Veiculo veiculo,
                         String idUFG) {
@@ -42,7 +38,6 @@ class MotoristaUFG extends Motorista implements IAvaliavel {
         return somaNotas / avaliacoesRecebidas.size();
     }
 
-    /** Método específico para verificar vínculo UFG. */
     public void verificarCredenciaisUFG() { /* ... */ }
 
     public String getIdUFG() { return idUFG; }

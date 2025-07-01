@@ -1,9 +1,11 @@
+package UFGCarona.model;
+
 import java.util.UUID;
 
 /**
  * Classe Veiculo: representa o veículo do motorista.
  */
-class Veiculo {
+public class Veiculo {
     private String id;
     private String placa;
     private String modelo;

@@ -1,10 +1,12 @@
+package UFGCarona.model;
+
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 /**
  * Classe Avaliacao: representa o feedback dado em uma carona.
  */
-class Avaliacao {
+public class Avaliacao {
     private String id; // ID único para a avaliação.
     private int nota; // Nota da avaliação (ex: 1 a 5).
     private String comentario;

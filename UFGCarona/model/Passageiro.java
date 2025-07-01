@@ -1,8 +1,10 @@
+package UFGCarona.model;
+
 /**
  * Classe Passageiro: Representa um usuário no papel de passageiro.
  * Herda de Usuario, adicionando funcionalidades específicas de um passageiro.
  */
-class Passageiro extends Usuario {
+public class Passageiro extends Usuario {
 
     /**
      * Construtor para criar um NOVO passageiro.
