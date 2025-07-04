@@ -43,12 +43,15 @@ Desenvolver e implementar um aplicativo móvel de caronas para a comunidade da U
 
 ### 4.1. Diagrama de Classes
 
-![Diagrama de Classes UFGCarona](https://github.com/user-attachments/assets/1d148152-57b0-4260-8826-fe1fd45b1fa3)
+![Diagrama de classes UFGCarona](https://github.com/user-attachments/assets/53ecc047-1dcf-4744-9053-f5a5b5fa5507)
+
 
 ### 4.2. Diagrama de Sequência (Caso de Uso: Pedir Carona)
 
-![Diagrama de Sequência UFGCarona](https://github.com/user-attachments/assets/ccd11c1f-e15d-4cd0-b841-70ab3f7e57a9)
+![Diagram de Sequência UFGCarona](https://github.com/user-attachments/assets/e517c02a-3054-4ade-b0e4-ac884131e19e)
+
 
 ### 4.3. Diagrama de Caso de Uso
 
-![Diagrama de Caso de Uso UFGCarona](https://github.com/user-attachments/assets/dab32d90-9073-444e-a1df-2d9c86680d7f)
+![Diagrama de Casos de Uso UFGCarona](https://github.com/user-attachments/assets/3261e405-d815-42d8-8398-a3d7fd140a38)
+
