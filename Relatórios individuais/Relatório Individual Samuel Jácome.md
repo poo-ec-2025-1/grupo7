@@ -11,6 +11,7 @@ Esse relatório tem como objetivo apresentar a evoluçaõ do projeto UFGCarona. 
 A versão 2.0 do projeto adota o padrão MVC (Model-View-Controller), que facilita o desenvolvimento e a organização do código.
 
 .UFGCaronaApp.java (Classe Principal)
+
    . Essa é a classe de entrada da aplicação, responsável por iniciar o sistema;
    . É aqui que a primeira View é instanciada e exibida (no caso, a LoginView), e o LoginController correspondente é inicializado para gerenciar a interação inicial do usuário;
 
